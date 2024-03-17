@@ -1,6 +1,17 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 require('dotenv').config();
+const database = require('./config/database');
+const ProductRoute = require('./routes/product.routes');
+
+app.use(express.json());
+app.use(cors());
+app.options('*', cors());
+
+database();
+
+app.use('/products', ProductRoute);
 
 app.get('*', (req, res) => {
   return res.json({ info: 'Hi! You have reached Products MS.' });

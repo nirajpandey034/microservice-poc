@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 require('dotenv').config();
 const database = require('./config/database');
-const UserRoute = require('./routes/user.route');
+const UserRoute = require('./routes/user.routes');
 
 app.use(express.json());
 app.use(cors());
