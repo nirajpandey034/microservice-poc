@@ -1,0 +1,28 @@
+# Put following code in default file: /etc/nginx/sites-available/default
+
+```````` 
+
+upstream users {
+    server 127.0.0.1:3001;
+}
+upstream products {
+    server 127.0.0.1:3002;
+}
+
+server{
+    listen 567;
+    location /users/ {
+        proxy_pass http://users;
+        proxy_set_header Host $host;
+    }
+    location /products/ {
+        proxy_pass http://products;
+        proxy_set_header Host $host;
+    }
+}
+
+`````````
+
+# Now we can access all our microservices with single nginx url
+# Example 1: http://{SERVER_ADDRESS}:567/users/login
+# Example 2: http://{SERVER_ADDRESS}:567/products/add
